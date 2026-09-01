@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maria Eduarda — Full Stack Developer</title>
+<meta name="description" content="Portfólio de Maria Eduarda, desenvolvedora full stack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1115;
+    --panel:#171A21;
+    --panel-2:#1D212A;
+    --line:#2A2E38;
+    --paper:#E9E6DD;
+    --muted:#8A8D93;
+    --amber: #ff1479;
+    --mint: #e4b237;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--amber);color:var(--ink);}
+
+  /* Layout */
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--mint);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:24px;
+  }
+  .eyebrow::before{content:"$";color:var(--amber);}
+
+  h1,h2,h3{font-weight:700;line-height:1.15;}
+  h2{font-size:clamp(24px,4vw,32px);margin-bottom:32px;}
+
+  /* Nav */
+  header{
+    position:sticky;top:0;z-index:10;
+    background:rgba(15,17,21,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:880px;margin:0 auto;padding:18px 24px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .logo{font-family:'JetBrains Mono', monospace;font-weight:700;font-size:15px;}
+  .logo span{color:var(--amber);}
+  .nav-links{display:flex;gap:28px;font-family:'JetBrains Mono', monospace;font-size:13px;color:var(--muted);}
+  .nav-links a:hover{color:var(--paper);}
+
+  /* Hero */
+  .hero{padding-top:72px;padding-bottom:96px;}
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:12px 16px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot.r{background:#E5645B;} .dot.y{background:#E8B84B;} .dot.g{background:#5FBF6E;}
+  .terminal-title{margin-left:8px;font-family:'JetBrains Mono', monospace;font-size:12px;color:var(--muted);}
+  .terminal-body{padding:24px 20px 32px;font-family:'JetBrains Mono', monospace;font-size:14px;min-height:180px;}
+  .terminal-body .line{margin-bottom:6px;color:var(--muted);}
+  .terminal-body .line .prompt{color:var(--mint);}
+  .terminal-body .out{color:var(--paper);white-space:pre-wrap;}
+  .cursor{display:inline-block;width:8px;height:16px;background:var(--amber);vertical-align:middle;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-name{font-size:clamp(36px,6vw,56px);margin-top:36px;}
+  .hero-role{font-family:'JetBrains Mono', monospace;color:var(--amber);font-size:16px;margin-top:8px;}
+  .hero-tagline{margin-top:20px;max-width:560px;color:var(--muted);font-size:16px;}
+  .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono', monospace;font-size:13px;
+    padding:12px 20px;border-radius:6px;border:1px solid var(--line);
+    transition:border-color .15s, transform .15s;
+  }
+  .btn:hover{border-color:var(--amber);transform:translateY(-1px);}
+  .btn.primary{background:var(--amber);color:var(--ink);border-color:var(--amber);font-weight:700;}
+  .btn.primary:hover{opacity:0.9;}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr;gap:16px;color:var(--muted);font-size:16px;max-width:640px;}
+  .about-grid strong{color:var(--paper);}
+
+  /* Projects */
+  .projects{display:grid;grid-template-columns:1fr;gap:20px;}
+  .project{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    transition:border-color .15s, transform .15s;
+  }
+  .project:hover{border-color:var(--amber);transform:translateY(-2px);}
+  .project-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .project-head h3{font-size:20px;}
+  .project-links{display:flex;gap:14px;font-family:'JetBrains Mono', monospace;font-size:12px;}
+  .project-links a{color:var(--mint);}
+  .project-links a:hover{color:var(--amber);}
+  .project p{color:var(--muted);margin-top:10px;font-size:15px;}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .tag{
+    font-family:'JetBrains Mono', monospace;font-size:11px;
+    padding:4px 10px;border-radius:20px;
+    background:var(--panel-2);color:var(--mint);border:1px solid var(--line);
+  }
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
+  .skill-group h3{font-family:'JetBrains Mono', monospace;font-size:13px;color:var(--amber);margin-bottom:12px;text-transform:lowercase;}
+  .skill-group ul{list-style:none;color:var(--muted);font-size:15px;}
+  .skill-group li{padding:4px 0;border-bottom:1px dashed var(--line);}
+  .skill-group li:last-child{border-bottom:none;}
+
+  /* Contact */
+  .contact-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:36px;
+  }
+  .contact-box p{color:var(--muted);margin-bottom:24px;font-size:16px;}
+  .contact-list{display:flex;flex-direction:column;gap:14px;font-family:'JetBrains Mono', monospace;font-size:15px;}
+  .contact-list a{display:flex;align-items:center;gap:10px;}
+  .contact-list a:hover{color:var(--amber);}
+  .contact-list .k{color:var(--mint);}
+
+  footer{padding:32px 0;text-align:center;color:var(--muted);font-family:'JetBrains Mono', monospace;font-size:12px;}
+
+  @media (max-width:600px){
+    section{padding:64px 0;}
+    .nav-links{gap:16px;}
+    .terminal-body{font-size:13px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">&lt;<span>Maria</span>/&gt;</div>
+    <div class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#projetos">projetos</a>
+      <a href="#skills">skills</a>
+      <a href="#contato">contato</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="terminal-title">bash — ~/portfolio</span>
+      </div>
+      <div class="terminal-body" id="typed"></div>
+    </div>
+
+    <h1 class="hero-name">Maria Eduarda Andrade</h1>
+    <p class="hero-role">Desenvolvedora Full Stack</p>
+    <p class="hero-tagline">
+      Construo aplicações web do banco de dados à interface — APIs, front-ends
+      e tudo que conecta os dois. Foco em código limpo e produtos que funcionam de verdade.
+    </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#projetos">Ver projetos</a>
+      <a class="btn secondary" href="https://github.com/mariaandraddz" target="_blank">GitHub</a>
+      <a class="btn third" href="https://www.linkedin.com/in/mariaeduardaandradee/" target="_blank">Linkedin</a>
+      <a class="btn" href="curriculo/Curriculo%20.pdf">Baixar CV</a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="eyebrow">whoami</div>
+    <h2>Sobre mim</h2>
+    <div class="about-grid">
+      <p>
+        Sou desenvolvedora full stack na WEX Brasil Tech,  empresa global de tecnologia financeira que oferece soluções de pagamento B2B e gestão de frotas, benefícios corporativos e processamento de transações comerciais. Com experiência em construir aplicações
+        de ponta a ponta — do modelo de dados à experiência do usuário.
+        Gosto de resolver problemas reais e entregar produtos que as pessoas
+        realmente usam.
+      </p>
+      <p>
+        Atualmente trabalho com <strong>API RESTful e GO</strong> e estou sempre
+        aprendendo algo novo — seja uma linguagem, um framework ou só uma forma
+        melhor de resolver um problema antigo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap">
+    <div class="eyebrow">ls ./projetos</div>
+    <h2>Projetos</h2>
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-head">
+          <h3>api-cambio</h3>
+          <div class="project-links">
+            <a href="https://github.com/mariaandraddz/api-cambio" target="_blank">repositório →</a>
+          </div>
+        </div>
+        <p>API REST simples em Go para conversão de moedas em tempo real, utilizando cotações da AwesomeAPI.</p>
+        <div class="tags">
+          <span class="tag">GO</span>
+          <span class="tag">GIN</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3>Calendario</h3>
+          <div class="project-links">
+            <a href="https://github.com/mariaandraddz/Calendario" target="_blank">repositório →</a>
+
+          </div>
+        </div>
+        <p>Uma aplicação simples e eficiente desenvolvida em Python para visualização e gerenciamento de datas. Este projeto permite visualizar calendários mensais/anuais, basta digitar o ano e mes que deseja solicitar.</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Datetime</span>
+          <span class="tag">Calendar</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">cat skills.json</div>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>front-end</h3>
+        <ul>
+          <li>JavaScript / TypeScript</li>
+          <li>React</li>
+          <li>HTML / CSS</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>back-end</h3>
+        <ul>
+          <li>Node.js</li>
+          <li>GO</li>
+          <li>Python</li>
+          <li>REST / GraphQL APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>dados & infra</h3>
+        <ul>
+          <li>PostgreSQL / MongoDB</li>
+          <li>Docker</li>
+          <li>Git / CI-CD</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <div class="eyebrow">./contato.sh</div>
+    <h2>Vamos conversar</h2>
+    <div class="contact-box">
+      <p>Aberta a novas oportunidades e projetos interessantes. Me chama:</p>
+      <div class="contact-list">
+        <a href="mariaeduardaandrade00134@gmail.com"><span class="k">email</span> → mariaeduardaandrade00134@gmail.com</a>
+        <a href="https://github.com/mariaandraddz" target="_blank" rel="noopener"><span class="k">github</span> → github.com/mariaandraddz</a>
+        <a href="https://www.linkedin.com/in/mariaeduardaandradee/" target="_blank" rel="noopener"><span class="k">linkedin</span> → linkedin.com/in/mariaeduardaandradee</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Maria Eduarda</div>
+</footer>
+
+<script>
+  const lines = [
+    { prompt: '~$ ', cmd: 'whoami', out: 'Maria Eduarda Andrade' },
+    { prompt: '~$ ', cmd: 'cat cargo.txt', out: 'Desenvolvedora Full Stack' },
+    { prompt: '~$ ', cmd: 'echo $STATUS', out: 'Disponível para novos projetos' }
+  ];
+
+  const el = document.getElementById('typed');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic(){
+    el.innerHTML = lines.map(l =>
+      `<div class="line"><span class="prompt">${l.prompt}</span>${l.cmd}</div><div class="out">${l.out}</div>`
+    ).join('');
+  }
+
+  if (reduceMotion) {
+    renderStatic();
+  } else {
+    let li = 0, ci = 0;
+    let html = '';
+    function typeChar(){
+      if (li >= lines.length) {
+        el.innerHTML = html + '<span class="cursor"></span>';
+        return;
+      }
+      const line = lines[li];
+      if (ci === 0) html += `<div class="line"><span class="prompt">${line.prompt}</span><span class="typing"></span></div>`;
+
+      if (ci < line.cmd.length) {
+        ci++;
+        const typed = line.cmd.slice(0, ci);
+        el.innerHTML = html.replace('<span class="typing"></span>', `<span class="typing">${typed}</span><span class="cursor"></span>`);
+        setTimeout(typeChar, 35 + Math.random()*35);
+      } else {
+        html = html.replace('<span class="typing"></span>', `<span class="typing">${line.cmd}</span>`);
+        html += `<div class="out">${line.out}</div>`;
+        li++; ci = 0;
+        setTimeout(typeChar, 260);
+      }
+    }
+    typeChar();
+  }
+</script>
+
+</body>
+</html>
